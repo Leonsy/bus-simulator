@@ -1,0 +1,22 @@
+{
+  "name": "bus-simulator",
+  "version": "1.0.0",
+  "description": "Bus in Carpark Simulator",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Leon Piao",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "nodemon": "^1.18.11"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2"
+  }
+}
