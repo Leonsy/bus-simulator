@@ -1,11 +1,13 @@
 import { directionName, command } from './utils/configuration';
+import { error, info, success } from './utils/messageWriter';
+import message from './utils/message';
 
 class Bus {
     /**
      * The Bus constructor
-     * @param {bool} isInCarPark - If the bus is in the car park or not
-     * @param {int} xCoordinate - X-coordinate
-     * @param {int} yCoordinate - Y-coordinate
+     * @param {boolean} isInCarPark - If the bus is in the car park or not
+     * @param {number} xCoordinate - X-coordinate
+     * @param {number} yCoordinate - Y-coordinate
      * @param {string} direction - Direction of the bus
      * @constructor
      */
@@ -18,8 +20,8 @@ class Bus {
 
     /**
      * Place the bus
-     * @param  {string} xCoordinate - X-coordinate
-     * @param  {string} yCoordinate - Y-coordinate
+     * @param  {number} xCoordinate - X-coordinate
+     * @param  {number} yCoordinate - Y-coordinate
      * @param  {string} direction - Direction
      */
     place( xCoordinate, yCoordinate, direction ){
@@ -46,7 +48,12 @@ class Bus {
             case directionName.EAST:
                 this.xCoordinate + 1;
                 break;
+            default:
+                error(message.invalidDirection);
+                return;            
         }
+
+        success(message.moveSuccess);
     }
 
     /**

@@ -1,4 +1,4 @@
-import { info, sucess, error } from './utils/messageWriter';
+import { info, success, error } from './utils/messageWriter';
 import Bus from './bus';
 import CarPark from './carPark';
 import { carParkSize } from './utils/configuration';
@@ -17,7 +17,30 @@ const run = () => {
     info(message.carParkSize);
 
     rl.on('line', (input) => {
-        console.log(`Received: ${input}`);
+        const trimedInput = input.trim();
+
+        if (!trimedInput.match(/PLACE\s\S|MOVE|LEFT|RIGHT|REPORT/)) {
+            error(message.invalidCommand);
+            return;
+        }
+
+        if (!bus.isInCarPark && !trimedInput.match(/PLACE\s\d,\d,NORTH|EAST|SOUTH|WEST/)) {
+            error(message.invalidCommand);
+            return;
+        }
+
+        switch (true) {
+            case trimedInput.match(/PLACE\s\d,\d,NORTH|EAST|SOUTH|WEST/):
+                const placeDetails = trimedInput.match(/\d,\d,NORTH|EAST|SOUTH|WEST/).split(',');
+                const x = parseInt(placeDetails[0]);
+                const y = parseInt(placeDetails[1]);
+                if (!carPark.canPlace(x, y)) {
+                    error(message.invalidPlace);
+                    return;
+                }
+                bus.move(x, y, placeDetails[2]);
+        }
+
     });
 
 }

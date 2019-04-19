@@ -3,8 +3,8 @@ import { directionName } from './utils/configuration';
 class CarPark {
     /**
      * The CarPark constructor
-     * @param {int} width - Width of the car park
-     * @param {int} height - Height of the car park
+     * @param {number} width - Width of the car park
+     * @param {number} height - Height of the car park
      * @param {object} bus - The bus that need to park  
      * @constructor
      */
@@ -16,8 +16,8 @@ class CarPark {
 
     /**
      * If we can place the bus in car park
-     * @param  {string} xCoordinate - X-coordinate
-     * @param  {string} yCoordinate - Y-coordinate
+     * @param  {number} xCoordinate - X-coordinate
+     * @param  {number} yCoordinate - Y-coordinate
      */
     canPlace( xCoordinate, yCoordinate ){
         return xCoordinate < this.width && yCoordinate < this.height;
