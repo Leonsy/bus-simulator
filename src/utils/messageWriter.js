@@ -15,7 +15,7 @@ export const info = message => {
  *
  * @param {string} message - The message to be displayed
  */
-export const sucess = message => {
+export const success = message => {
     log(chalk.black.bgGreen(message));
 };
 

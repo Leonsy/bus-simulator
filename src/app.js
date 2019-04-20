@@ -10,7 +10,7 @@ const run = () => {
         input: process.stdin
     });
 
-    const bus = new Bus(true);
+    const bus = new Bus(false);
     const carPark = new CarPark(carParkSize.width, carParkSize.height, bus);
 
     info(message.welcome);
@@ -24,21 +24,46 @@ const run = () => {
             return;
         }
 
-        if (!bus.isInCarPark && !trimedInput.match(/PLACE\s\d,\d,NORTH|EAST|SOUTH|WEST/)) {
+        //If the bus is not in car park, only accept PLACE command
+        if (!bus.isInCarPark && !trimedInput.match(/PLACE\s\d,\d,(NORTH|EAST|SOUTH|WEST)/)) {
             error(message.invalidCommand);
             return;
         }
 
         switch (true) {
-            case trimedInput.match(/PLACE\s\d,\d,NORTH|EAST|SOUTH|WEST/):
-                const placeDetails = trimedInput.match(/\d,\d,NORTH|EAST|SOUTH|WEST/).split(',');
+            case trimedInput.match(/PLACE\s\d,\d,NORTH|EAST|SOUTH|WEST/) != null:
+                const placeDetails = trimedInput.match(/\d,\d,(NORTH|EAST|SOUTH|WEST)/)[0].split(',');
                 const x = parseInt(placeDetails[0]);
                 const y = parseInt(placeDetails[1]);
                 if (!carPark.canPlace(x, y)) {
                     error(message.invalidPlace);
                     return;
                 }
-                bus.move(x, y, placeDetails[2]);
+                bus.place(x, y, placeDetails[2]);
+                break;
+
+            case trimedInput === 'MOVE':
+                if (!carPark.canMove()) {
+                    error(message.invalidMove);
+                    return;
+                }
+                bus.move();
+                break;
+
+            case trimedInput === 'LEFT':
+                bus.turn('LEFT');
+                break;
+
+            case trimedInput === 'RIGHT':
+                bus.turn('RIGHT');
+                break;
+
+            case trimedInput === 'REPORT':
+                info(`${bus.xCoordinate},${bus.yCoordinate},${bus.direction}`);
+                break;
+
+            default:
+                error(message.invalidCommand);
         }
 
     });

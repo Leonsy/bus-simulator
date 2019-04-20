@@ -12,10 +12,10 @@ class Bus {
      * @constructor
      */
     constructor(isInCarPark, xCoordinate, yCoordinate, direction) {
-      this.isInCarPark = isInCarPark;
-      this.xCoordinate = xCoordinate;
-      this.yCoordinate = yCoordinate;
-      this.direction = direction;
+        this.isInCarPark = isInCarPark;
+        this.xCoordinate = xCoordinate;
+        this.yCoordinate = yCoordinate;
+        this.direction = direction;
     }
 
     /**
@@ -24,7 +24,7 @@ class Bus {
      * @param  {number} yCoordinate - Y-coordinate
      * @param  {string} direction - Direction
      */
-    place( xCoordinate, yCoordinate, direction ){
+    place(xCoordinate, yCoordinate, direction) {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
         this.direction = direction;
@@ -34,23 +34,23 @@ class Bus {
     /**
      * Move the bus
      */
-    move(){
+    move() {
         switch (this.direction) {
             case directionName.NORTH:
-                this.yCoordinate + 1;
+                this.yCoordinate++;
                 break;
             case directionName.SOUTH:
-                this.yCoordinate - 1;
+                this.yCoordinate--;
                 break;
             case directionName.WEST:
-                this.xCoordinate - 1;
+                this.xCoordinate--;
                 break;
             case directionName.EAST:
-                this.xCoordinate + 1;
+                this.xCoordinate++;
                 break;
             default:
                 error(message.invalidDirection);
-                return;            
+                return;
         }
 
         success(message.moveSuccess);
@@ -60,22 +60,30 @@ class Bus {
      * Turn the bus
      * @param  {string} turnDirection - Direction
      */
-    turn( turnDirection ){
+    turn(turnDirection) {
         const directions = [directionName.WEST, directionName.NORTH, directionName.EAST, directionName.SOUTH];
         let currentIndex = directions.indexOf(this.direction);
         switch (turnDirection) {
-          case command.LEFT:
-            currentIndex--;
-            break;
-          case command.RIGHT:
-            currentIndex++;
-            break;
+            case command.LEFT:
+                currentIndex--;
+                break;
+            case command.RIGHT:
+                currentIndex++;
+                break;
+            default:
+                error(message.invalidDirection);
+                return;
         }
 
-        if (currentIndex < 0) return directionName.SOUTH;
-        if (currentIndex > 3) return directionName.WEST;
-
-        return directions[currentIndex];
+        if (currentIndex < 0){
+            this.direction = directionName.SOUTH;
+            return;
+        } 
+        if (currentIndex > 3){
+            this.direction = directionName.WEST;
+            return;
+        }
+        this.direction = directions[currentIndex];
     }
 }
 

@@ -30,13 +30,13 @@ class CarPark {
     canMove(){
         switch (this.bus.direction) {
             case directionName.NORTH:
-                return this.car.yCoordinate < this.height -1;
+                return this.bus.yCoordinate < this.height -1;
             case directionName.SOUTH:
-                return this.car.yCoordinate > 0;
+                return this.bus.yCoordinate > 0;
             case directionName.WEST:
-                return this.car.xCoordinate > 0;
+                return this.bus.xCoordinate > 0;
             case directionName.EAST:
-                return this.car.xCoordinate < this.width - 1;
+                return this.bus.xCoordinate < this.width - 1;
         }
     }
 }
