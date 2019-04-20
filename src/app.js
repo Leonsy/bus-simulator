@@ -46,7 +46,7 @@ const handleInput = (input) => {
             const y = parseInt(placeDetails[1]);
             if (!carPark.canPlace(x, y)) {
                 error(message.invalidPlace);
-                return;
+                break;
             }
             bus.place(x, y, placeDetails[2]);
             break;
@@ -54,7 +54,7 @@ const handleInput = (input) => {
         case trimedInput === command.MOVE:
             if (!carPark.canMove()) {
                 error(message.invalidMove);
-                return;
+                break;
             }
             bus.move();
             break;
@@ -68,7 +68,7 @@ const handleInput = (input) => {
             break;
 
         case trimedInput === command.REPORT:
-            info(`${bus.xCoordinate},${bus.yCoordinate},${bus.direction}`);
+            success(`${bus.xCoordinate},${bus.yCoordinate},${bus.direction}`);
             break;
 
         default:

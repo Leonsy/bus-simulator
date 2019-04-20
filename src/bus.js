@@ -29,6 +29,8 @@ class Bus {
         this.yCoordinate = yCoordinate;
         this.direction = direction;
         this.isInCarPark = true;
+
+        success(message.placeSuccess);
     }
 
     /**
@@ -77,13 +79,14 @@ class Bus {
 
         if (currentIndex < 0){
             this.direction = directionName.SOUTH;
-            return;
         } 
-        if (currentIndex > 3){
+        else if (currentIndex > 3){
             this.direction = directionName.WEST;
-            return;
         }
-        this.direction = directions[currentIndex];
+        else{
+            this.direction = directions[currentIndex];
+        }
+        success(message.turnSuccess);
     }
 }
 
