@@ -88,6 +88,18 @@ class Bus {
         }
         success(message.turnSuccess);
     }
+
+    /**
+     * Report the bus location and direction
+     *  @return {object} x|y coordinate and direction of the bus
+     */
+    report() {
+        return {
+            xCoordinate: this.xCoordinate,
+            yCoordinate: this.yCoordinate,
+            direction: this.direction
+        }
+    }
 }
 
 export default Bus;

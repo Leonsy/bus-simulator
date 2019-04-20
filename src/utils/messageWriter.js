@@ -7,6 +7,7 @@ const log = console.log;
  * @param {string} message - The message to be displayed
  */
 export const info = message => {
+    if(process.env.NODE_ENV === 'test') return;
     log(chalk.blue(message));
 };
 
@@ -16,6 +17,7 @@ export const info = message => {
  * @param {string} message - The message to be displayed
  */
 export const success = message => {
+    if(process.env.NODE_ENV === 'test') return;
     log(chalk.black.bgGreen(message));
 };
 
@@ -25,5 +27,6 @@ export const success = message => {
  * @param {string} message - The message to be displayed
  */
 export const error = message => {
+    if(process.env.NODE_ENV === 'test') return;
     log(chalk.white.bgRed(message));
 };

@@ -68,7 +68,8 @@ const handleInput = (input) => {
             break;
 
         case trimedInput === command.REPORT:
-            success(`${bus.xCoordinate},${bus.yCoordinate},${bus.direction}`);
+            const {xCoordinate, yCoordinate, direction } = bus.report();
+            success(`${xCoordinate},${yCoordinate},${direction}`);
             break;
 
         default:
