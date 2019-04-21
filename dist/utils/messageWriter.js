@@ -18,7 +18,7 @@ var log = console.log;
 
 var info = function info(message) {
   if (process.env.NODE_ENV === 'test') return;
-  log(_chalk["default"].blue(message));
+  log(_chalk["default"].magentaBright(message));
 };
 /**
  * To show a success message to the console

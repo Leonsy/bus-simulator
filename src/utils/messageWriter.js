@@ -8,7 +8,7 @@ const log = console.log;
  */
 export const info = message => {
     if(process.env.NODE_ENV === 'test') return;
-    log(chalk.blue(message));
+    log(chalk.magentaBright(message));
 };
 
 /**
